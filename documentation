@@ -1,0 +1,273 @@
+
+📄 FULL PROJECT DOCUMENTATION
+CampusEye AI: Problem Reporter + AI Triage
+
+1. Project Overview
+Project Name:
+CampusEye AI: Problem Reporter + AI Triage
+Team Name:
+Team SolveX
+Tagline:
+Turning campus complaints into smart action.
+
+1.1 Introduction
+CampusEye AI is an AI-powered campus problem reporting and triage system designed to help students report real-life campus issues and ensure those issues are handled efficiently.
+In many campuses, problems such as water shortages, Wi-Fi failures, sanitation issues, broken equipment, and safety risks are reported informally through chats, friends, or Telegram groups. These reports are often lost, duplicated, or ignored.
+Our system transforms these scattered complaints into structured, prioritized, and actionable tasks using Artificial Intelligence.
+
+2. Problem Statement
+2.1 Current Situation
+In Bahir Dar University campuses:
+	Students face daily infrastructure and service issues
+	Complaints are shared informally (Telegram, word-of-mouth)
+	No centralized reporting system exists
+	Issues are:
+	delayed
+	duplicated
+	ignored
+	sent to wrong offices
+2.2 Core Problems
+	Lack of structured complaint system
+	No prioritization of urgent issues
+	No visibility for administration
+	No tracking or accountability
+	No protection against spam or fake reports
+
+3. Proposed Solution
+CampusEye AI solves this by providing:
+3.1 Student Reporting System
+Students can:
+	submit issues using text, image, and location
+	track the status of their reports
+3.2 AI-Based Triage Engine
+AI automatically:
+	classifies the issue
+	determines urgency
+	detects duplicates
+	identifies suspicious reports
+	routes to the correct office
+3.3 Office Dashboard
+Offices can:
+	view incoming issues
+	filter by priority/category
+	update status
+	take action
+3.4 Admin Dashboard
+Admins can:
+	see trends
+	identify problem hotspots
+	monitor performance
+	improve decision-making
+
+4. Key Features
+4.1 Core Features
+	Report submission (text + image + location)
+	AI classification (category detection)
+	Urgency scoring (Low → Critical)
+	Duplicate detection
+	Office routing
+	Status tracking (New → Resolved)
+4.2 Advanced AI Features
+4.2.1 AI Triage System
+Automatically prioritizes issues:
+	Critical → immediate action
+	High → urgent
+	Medium → normal
+	Low → minor
+4.2.2 Duplicate Detection
+Merges repeated complaints:
+	same location
+	similar description
+	same category
+4.2.3 Anomaly Detection (Important Feature 🚀)
+Prevents:
+	spam reports
+	fake submissions
+	Sybil attacks (one user sending many fake reports)
+4.2.4 Privacy Protection
+	role-based access
+	limited data exposure
+	student identity protection
+
+5. System Architecture
+5.1 High-Level Flow
+Student → Backend → AI Engine → Database → Office Dashboard → Action → Status Update
+
+5.2 System Components
+1. Frontend
+	Student UI
+	Office dashboard
+	Admin dashboard
+2. Backend API
+	handles requests
+	connects AI
+	manages data
+3. AI Engine
+	classification
+	urgency scoring
+	duplicate detection
+	anomaly detection
+4. Database
+	stores users
+	stores reports
+	stores AI outputs
+
+6. Database Design
+6.1 Users Table
+	id
+	name
+	email
+	role (student / office / admin)
+6.2 Reports Table
+	id
+	title
+	description
+	location
+	image_url
+	submitted_by
+	category
+	severity
+	ai_summary
+	office_route
+	duplicate_flag
+	duplicate_of
+	anomaly_flag
+	anomaly_score
+	status
+	created_at
+6.3 Offices Table
+	id
+	office_name
+	category_handled
+
+7. AI System Design
+7.1 AI Responsibilities
+1. Classification
+Categories:
+	Water
+	Wi-Fi
+	Electricity
+	Sanitation
+	Safety
+	Equipment
+	Administration
+2. Severity Scoring
+	Low
+	Medium
+	High
+	Critical
+3. Duplicate Detection
+Compare:
+	text similarity
+	location
+	time
+4. Anomaly Detection
+Detect:
+	spam behavior
+	repeated submissions
+	fake content
+
+7.2 Example AI Output
+{
+  "category": "Water",
+  "severity": "High",
+  "summary": "Water outage in Dorm 2 affecting many students",
+  "office_route": "Facilities",
+  "duplicate_flag": false,
+  "anomaly_flag": false,
+  "anomaly_score": 0.05
+}
+
+8. API Design
+8.1 Endpoints
+POST /api/reports
+	create report
+	send to AI
+	save result
+GET /api/reports
+	fetch all reports
+GET /api/reports/:id
+	get single report
+PATCH /api/reports/:id/status
+	update report status
+GET /api/analytics
+	return insights
+
+9. User Interface Pages
+9.1 Student Pages
+	Report submission page
+	My reports page
+9.2 Office Pages
+	Dashboard (all reports)
+	Report detail view
+9.3 Admin Pages
+	Analytics dashboard
+	Trends & insights
+
+10. Security & Privacy
+10.1 Privacy Measures
+	hide student identity when not needed
+	role-based access control
+	minimal data collection
+10.2 Anti-Abuse System
+	anomaly detection
+	rate limiting (optional)
+	duplicate filtering
+
+11. Social Impact
+11.1 Impact on Students
+	faster problem resolution
+	transparency
+	trust in system
+11.2 Impact on Campus
+	better resource management
+	improved safety
+	data-driven decisions
+11.3 Long-Term Impact
+	smarter campus infrastructure
+	scalable to other universities
+	improved accountability
+
+12. Technology Stack
+Frontend
+	React
+Backend
+	node.js
+Database
+	PostgreSQL
+AI
+	Gemini API / OpenAI 
+Deployment
+	Vercel
+
+13. Development Plan
+Day 1
+	setup project
+	build report form
+	connect database
+	integrate AI
+Day 2
+	build dashboard
+	implement status updates
+	add duplicate + anomaly detection
+	polish UI
+	prepare demo
+
+14. Demo Flow
+1.	Student submits report
+2.	AI classifies and prioritizes
+3.	Duplicate report detected
+4.	Fake report flagged
+5.	Office dashboard updates
+6.	Status changed to resolved
+7.	Student sees update
+
+15. Conclusion
+CampusEye AI is not just a reporting tool — it is a smart decision-support system.
+It transforms:
+ scattered complaints
+  structured, intelligent, and actionable solutions
+This leads to:
+	faster responses
+	smarter management
+	better student life

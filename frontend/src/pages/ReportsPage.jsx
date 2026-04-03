@@ -21,28 +21,29 @@ function ReportsPage() {
   }, []);
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>All Reports</h2>
+    <div className="page-container">
+      <div className="page-header">
+        <h2>All Reports</h2>
+        <p>View all submitted campus issues and their AI classification results.</p>
+      </div>
 
       {loading ? (
         <p>Loading reports...</p>
       ) : reports.length === 0 ? (
-        <p>No reports found.</p>
+        <div className="panel"><p>No reports found.</p></div>
       ) : (
-        <div style={{ display: "grid", gap: "15px" }}>
+        <div className="card-grid">
           {reports.map((report) => (
-            <div
-              key={report.id}
-              style={{
-                border: "1px solid #ccc",
-                padding: "15px",
-                borderRadius: "8px"
-              }}
-            >
-              <h3>{report.title}</h3>
+            <div key={report.id} className="report-card">
+              <div className="report-top">
+                <h3>{report.title}</h3>
+                <span className={`badge severity-${report.severity.toLowerCase().replace(" ", "-")}`}>
+                  {report.severity}
+                </span>
+              </div>
+
               <p><strong>Location:</strong> {report.location}</p>
               <p><strong>Category:</strong> {report.category}</p>
-              <p><strong>Severity:</strong> {report.severity}</p>
               <p><strong>Status:</strong> {report.status}</p>
               <p><strong>Office:</strong> {report.office_route}</p>
               <p><strong>Summary:</strong> {report.ai_summary}</p>

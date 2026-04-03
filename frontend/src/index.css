@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f8f9fb;
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: #2563eb;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+input,
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}

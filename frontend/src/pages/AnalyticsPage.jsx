@@ -43,8 +43,16 @@ function AnalyticsPage() {
     Administration: reports.filter((r) => r.category === "Administration").length
   };
 
+  const recentReports = [...reports]
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+    .slice(0, 5);
+
   if (loading) {
-    return <div className="page-container"><p>Loading analytics...</p></div>;
+    return (
+      <div className="page-container">
+        <p>Loading analytics...</p>
+      </div>
+    );
   }
 
   return (
@@ -104,6 +112,21 @@ function AnalyticsPage() {
             <li><span>Administration</span><strong>{categoryCounts.Administration}</strong></li>
           </ul>
         </div>
+      </div>
+
+      <div className="panel recent-panel">
+        <h3>Recent Activity</h3>
+        {recentReports.length === 0 ? (
+          <p>No recent reports.</p>
+        ) : (
+          <ul className="recent-list">
+            {recentReports.map((report) => (
+              <li key={report.id}>
+                <strong>{report.title}</strong> — {report.status} — {report.location}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

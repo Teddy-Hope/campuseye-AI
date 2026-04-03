@@ -34,7 +34,7 @@ const analyzeReport = async (req, res) => {
 
 const createReport = async (req, res) => {
   try {
-    const { title, description, location } = req.body;
+    const { title, description, location, image_url } = req.body;
 
     if (!title || !description || !location) {
       return res.status(400).json({
@@ -58,6 +58,7 @@ const createReport = async (req, res) => {
       title,
       description,
       location,
+      image_url: image_url || "",
       status: "New",
       category: aiResult.category,
       severity: aiResult.severity,

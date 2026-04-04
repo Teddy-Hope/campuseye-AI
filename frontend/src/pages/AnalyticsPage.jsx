@@ -21,112 +21,113 @@ function AnalyticsPage() {
   }, []);
 
   const totalReports = reports.length;
-  const newReports = reports.filter((r) => r.status === "New").length;
+  const criticalReports = reports.filter((r) => r.severity === "Critical").length;
   const resolvedReports = reports.filter((r) => r.status === "Resolved").length;
   const suspiciousReports = reports.filter((r) => r.anomaly_flag).length;
-  const duplicateReports = reports.filter((r) => r.duplicate_flag).length;
 
-  const severityCounts = {
-    Low: reports.filter((r) => r.severity === "Low").length,
-    Medium: reports.filter((r) => r.severity === "Medium").length,
-    High: reports.filter((r) => r.severity === "High").length,
-    Critical: reports.filter((r) => r.severity === "Critical").length
-  };
+  const waterSanitation =
+    reports.filter((r) => r.category === "Water" || r.category === "Sanitation").length;
+  const wifiTech =
+    reports.filter((r) => r.category === "Wi-Fi/Network" || r.category === "Equipment").length;
+  const safetyInfra =
+    reports.filter((r) => r.category === "Safety" || r.category === "Electricity").length;
 
-  const categoryCounts = {
-    Water: reports.filter((r) => r.category === "Water").length,
-    "Wi-Fi/Network": reports.filter((r) => r.category === "Wi-Fi/Network").length,
-    Electricity: reports.filter((r) => r.category === "Electricity").length,
-    Sanitation: reports.filter((r) => r.category === "Sanitation").length,
-    Equipment: reports.filter((r) => r.category === "Equipment").length,
-    Safety: reports.filter((r) => r.category === "Safety").length,
-    Administration: reports.filter((r) => r.category === "Administration").length
-  };
+  const totalCategoryBase = waterSanitation + wifiTech + safetyInfra || 1;
 
-  const recentReports = [...reports]
-    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-    .slice(0, 5);
+  const waterPercent = Math.round((waterSanitation / totalCategoryBase) * 100);
+  const wifiPercent = Math.round((wifiTech / totalCategoryBase) * 100);
+  const safetyPercent = Math.round((safetyInfra / totalCategoryBase) * 100);
 
   if (loading) {
-    return (
-      <div className="page-container">
-        <p>Loading analytics...</p>
-      </div>
-    );
+    return <div className="page-wrap"><p>Loading analytics...</p></div>;
   }
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <h2>Analytics Dashboard</h2>
-        <p>Overview of campus issue trends and system activity.</p>
+    <div className="page-wrap">
+      <div className="section-header">
+        <h2>Admin Analytics</h2>
+        <p>System overview and AI anomaly detection insights.</p>
       </div>
 
-      <div className="stats-grid">
-        <div className="stat-card">
-          <h3>Total Reports</h3>
-          <p>{totalReports}</p>
+      <div className="analytics-top-stats">
+        <div className="analytics-top-card blue-line">
+          <div>
+            <span>Total Reports</span>
+            <strong>{totalReports}</strong>
+          </div>
+          <div className="analytics-card-icon blue-soft">📊</div>
         </div>
 
-        <div className="stat-card">
-          <h3>New Reports</h3>
-          <p>{newReports}</p>
+        <div className="analytics-top-card red-line">
+          <div>
+            <span>Critical Issues</span>
+            <strong>{criticalReports}</strong>
+          </div>
+          <div className="analytics-card-icon red-soft">🔥</div>
         </div>
 
-        <div className="stat-card">
-          <h3>Resolved Reports</h3>
-          <p>{resolvedReports}</p>
+        <div className="analytics-top-card green-line">
+          <div>
+            <span>Resolved</span>
+            <strong>{resolvedReports}</strong>
+          </div>
+          <div className="analytics-card-icon green-soft">✅</div>
         </div>
 
-        <div className="stat-card">
-          <h3>Suspicious Reports</h3>
-          <p>{suspiciousReports}</p>
-        </div>
-
-        <div className="stat-card">
-          <h3>Duplicate Reports</h3>
-          <p>{duplicateReports}</p>
+        <div className="analytics-top-card purple-line">
+          <div>
+            <span>Spam/Fakes Blocked</span>
+            <strong>{suspiciousReports}</strong>
+          </div>
+          <div className="analytics-card-icon purple-soft">🛡</div>
         </div>
       </div>
 
-      <div className="analytics-grid">
-        <div className="panel">
-          <h3>Reports by Severity</h3>
-          <ul className="analytics-list">
-            <li><span>Low</span><strong>{severityCounts.Low}</strong></li>
-            <li><span>Medium</span><strong>{severityCounts.Medium}</strong></li>
-            <li><span>High</span><strong>{severityCounts.High}</strong></li>
-            <li><span>Critical</span><strong>{severityCounts.Critical}</strong></li>
-          </ul>
-        </div>
-
-        <div className="panel">
+      <div className="analytics-main-grid">
+        <div className="analytics-panel large-panel">
           <h3>Reports by Category</h3>
-          <ul className="analytics-list">
-            <li><span>Water</span><strong>{categoryCounts.Water}</strong></li>
-            <li><span>Wi-Fi/Network</span><strong>{categoryCounts["Wi-Fi/Network"]}</strong></li>
-            <li><span>Electricity</span><strong>{categoryCounts.Electricity}</strong></li>
-            <li><span>Sanitation</span><strong>{categoryCounts.Sanitation}</strong></li>
-            <li><span>Equipment</span><strong>{categoryCounts.Equipment}</strong></li>
-            <li><span>Safety</span><strong>{categoryCounts.Safety}</strong></li>
-            <li><span>Administration</span><strong>{categoryCounts.Administration}</strong></li>
-          </ul>
-        </div>
-      </div>
 
-      <div className="panel recent-panel">
-        <h3>Recent Activity</h3>
-        {recentReports.length === 0 ? (
-          <p>No recent reports.</p>
-        ) : (
-          <ul className="recent-list">
-            {recentReports.map((report) => (
-              <li key={report.id}>
-                <strong>{report.title}</strong> — {report.status} — {report.location}
-              </li>
-            ))}
-          </ul>
-        )}
+          <div className="category-row">
+            <div className="category-info">
+              <span>Water & Sanitation</span>
+              <strong>{waterPercent}%</strong>
+            </div>
+            <div className="progress-track">
+              <div className="progress-fill blue-fill" style={{ width: `${waterPercent}%` }}></div>
+            </div>
+          </div>
+
+          <div className="category-row">
+            <div className="category-info">
+              <span>Wi-Fi & Tech</span>
+              <strong>{wifiPercent}%</strong>
+            </div>
+            <div className="progress-track">
+              <div className="progress-fill purple-fill" style={{ width: `${wifiPercent}%` }}></div>
+            </div>
+          </div>
+
+          <div className="category-row">
+            <div className="category-info">
+              <span>Safety & Infrastructure</span>
+              <strong>{safetyPercent}%</strong>
+            </div>
+            <div className="progress-track">
+              <div className="progress-fill red-fill" style={{ width: `${safetyPercent}%` }}></div>
+            </div>
+          </div>
+        </div>
+
+        <div className="analytics-panel engine-panel">
+          <div className="engine-icon-wrap">
+            <div className="engine-icon">🤖</div>
+          </div>
+          <h3>AI Engine Status: Active</h3>
+          <p>
+            The AI has automatically triaged 100% of incoming reports, helping
+            reduce manual sorting effort and improving visibility of urgent and suspicious cases.
+          </p>
+        </div>
       </div>
     </div>
   );

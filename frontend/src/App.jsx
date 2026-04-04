@@ -8,33 +8,30 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 function App() {
   return (
     <BrowserRouter>
-      <div className="app-shell">
-        <aside className="sidebar">
-          <div className="brand">
-            <h2>CampusEye AI</h2>
-            <p>Smart campus issue management</p>
+      <div className="app-root">
+        <header className="topbar">
+          <div className="topbar-brand">
+            <div className="brand-dot"></div>
+            <span>CampusEye AI</span>
           </div>
 
-          <nav className="sidebar-nav">
-            <NavLink to="/" end className="nav-link">
-              Home
+          <nav className="topbar-nav">
+            <NavLink to="/report" className="topbar-link">
+              Submit Issue
             </NavLink>
-            <NavLink to="/report" className="nav-link">
-              Submit Report
+            <NavLink to="/reports" className="topbar-link">
+              My Reports
             </NavLink>
-            <NavLink to="/reports" className="nav-link">
-              Reports
+            <NavLink to="/office-dashboard" className="topbar-link">
+              Office Desk
             </NavLink>
-            <NavLink to="/office-dashboard" className="nav-link">
-              Office Dashboard
-            </NavLink>
-            <NavLink to="/analytics" className="nav-link">
-              Analytics
+            <NavLink to="/analytics" className="topbar-link">
+              Admin Analytics
             </NavLink>
           </nav>
-        </aside>
+        </header>
 
-        <main className="main-content">
+        <main className="main-shell">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/report" element={<ReportPage />} />

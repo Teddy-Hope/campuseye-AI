@@ -21,32 +21,62 @@ function ReportsPage() {
     fetchReports();
   }, []);
 
+  const totalReports = reports.length;
+  const resolvedReports = reports.filter((r) => r.status === "Resolved").length;
+  const suspiciousReports = reports.filter((r) => r.anomaly_flag).length;
+
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <h2>All Reports</h2>
-        <p>View all submitted campus issues and their AI classification results.</p>
+    <div className="page-wrap">
+      <div className="section-header">
+        <h2>My Reports</h2>
+        <p>Track all submitted issues, AI results, and resolution progress.</p>
+      </div>
+
+      <div className="dashboard-stats">
+        <div className="dashboard-stat-card">
+          <span>Total Reports</span>
+          <strong>{totalReports}</strong>
+        </div>
+        <div className="dashboard-stat-card">
+          <span>Resolved</span>
+          <strong>{resolvedReports}</strong>
+        </div>
+        <div className="dashboard-stat-card">
+          <span>Suspicious</span>
+          <strong>{suspiciousReports}</strong>
+        </div>
       </div>
 
       {loading ? (
         <p>Loading reports...</p>
       ) : reports.length === 0 ? (
-        <div className="panel">
-          <p>No reports found.</p>
-        </div>
+        <div className="empty-card">No reports found.</div>
       ) : (
-        <div className="card-grid">
+        <div className="reports-grid">
           {reports.map((report) => (
-            <div key={report.id} className="report-card">
-              <div className="report-top">
-                <h3>{report.title}</h3>
-                <span
-                  className={`badge severity-${report.severity
-                    .toLowerCase()
-                    .replace(" ", "-")}`}
-                >
-                  {report.severity}
-                </span>
+            <div key={report.id} className="issue-card enhanced-card">
+              <div className="issue-card-header">
+                <div>
+                  <div className="issue-id-line">Report #{report.id}</div>
+                  <h3>{report.title}</h3>
+                </div>
+
+                <div className="badge-group">
+                  <span
+                    className={`status-badge severity-${report.severity
+                      .toLowerCase()
+                      .replace(" ", "-")}`}
+                  >
+                    {report.severity}
+                  </span>
+                  <span
+                    className={`status-chip status-${report.status
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                  >
+                    {report.status}
+                  </span>
+                </div>
               </div>
 
               {report.image_url && (
@@ -59,21 +89,52 @@ function ReportsPage() {
                 </div>
               )}
 
-              <div className="meta-grid">
-                <p><strong>Location:</strong> {report.location}</p>
-                <p><strong>Category:</strong> {report.category}</p>
-                <p><strong>Status:</strong> {report.status}</p>
-                <p><strong>Office:</strong> {report.office_route}</p>
-                <p><strong>Duplicate:</strong> {report.duplicate_flag ? "Yes" : "No"}</p>
-                <p><strong>Suspicious:</strong> {report.anomaly_flag ? "Yes" : "No"}</p>
+              <div className="meta-card-grid">
+                <div className="meta-card">
+                  <span>Location</span>
+                  <strong>{report.location}</strong>
+                </div>
+                <div className="meta-card">
+                  <span>Category</span>
+                  <strong>{report.category}</strong>
+                </div>
+                <div className="meta-card">
+                  <span>Office Route</span>
+                  <strong>{report.office_route}</strong>
+                </div>
+                <div className="meta-card">
+                  <span>Duplicate</span>
+                  <strong>{report.duplicate_flag ? "Yes" : "No"}</strong>
+                </div>
+                <div className="meta-card">
+                  <span>Suspicious</span>
+                  <strong>{report.anomaly_flag ? "Yes" : "No"}</strong>
+                </div>
+                <div className="meta-card">
+                  <span>Anomaly Score</span>
+                  <strong>{report.anomaly_score}</strong>
+                </div>
               </div>
 
-              <p><strong>Summary:</strong> {report.ai_summary}</p>
-              <p><strong>Description:</strong> {report.description}</p>
+              <div className="content-block">
+                <span>Description</span>
+                <p>{report.description}</p>
+              </div>
 
-              <div className="timestamp-box">
-                <p><strong>Created:</strong> {formatDateTime(report.created_at)}</p>
-                <p><strong>Updated:</strong> {formatDateTime(report.updated_at)}</p>
+              <div className="content-block summary-block">
+                <span>AI Summary</span>
+                <p>{report.ai_summary}</p>
+              </div>
+
+              <div className="time-row">
+                <div className="time-pill">
+                  <span>Created</span>
+                  <strong>{formatDateTime(report.created_at)}</strong>
+                </div>
+                <div className="time-pill">
+                  <span>Updated</span>
+                  <strong>{formatDateTime(report.updated_at)}</strong>
+                </div>
               </div>
             </div>
           ))}

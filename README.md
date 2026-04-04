@@ -1,68 +1,82 @@
-# CampusEye AI
+👁️ CampusEye AI
 
-**AI-Powered Campus Problem Reporter*  
-*Turning campus complaints into intelligent, prioritized actions.*
+AI-Powered Campus Problem Reporter Turning campus complaints into intelligent, prioritized actions.
+👥 Team SolveX
 
----
+Meet the 4-member team behind the innovation:
 
-## Team SolveX
-- **Teddy Hope** – Backend & AI Integration  
-- **Abusha** – Frontend & Project Documentation
+    Teddy Hope (Teddy-Hope) – Lead Backend Architect & AI Integration
 
----
+        Designed the AI logic, integrated Gemini API, and managed the overall system architecture.
 
-## Problem
-Students at Bahir Dar University face daily issues (water shortage, Wi-Fi problems, sanitation, safety, equipment failure, etc.).  
-Complaints are shared informally on Telegram and WhatsApp → they get **lost, duplicated, or ignored**.
+    Abusha – Frontend Lead & Project Documentation
 
-## Our Solution
-**CampusEye AI** lets students report problems with **text + photo + location**.  
-Our AI automatically:
-- Classifies the issue
-- Scores urgency (Low → Critical)
-- Detects duplicates
-- Detects fake/spam reports
-- Routes to the correct office
+        Developed the user interface, dashboard components, and authored the project technical documentation.
 
----
+    sismo091234-ops – Backend Middleware & Feature Engineering
 
-## Key Features
-- Student report submission (text + image + GPS)
-- AI classification & urgency scoring
-- Duplicate detection
-- Anomaly/spam detection
-- Real-time status tracking
-- Office & Admin dashboards
+        Improved system security by updating CORS middleware and implemented core features in server.js.
 
----
+    michusasa1621-max – Backend Developer & System Editor
 
-## Tech Stack
-- **Frontend**: React + Vite
-- **Backend**: FastAPI (Node.js in current repo)
-- **AI**: Gemini API / OpenAI
-- **Database**: PostgreSQL
+        Conducted critical backend updates, code edits, and optimized server-side performance.
 
----
+📍 The Problem
 
-## How to Run Locally
+Students at Bahir Dar University face daily challenges such as water shortages, Wi-Fi outages, sanitation issues, and equipment failures. Currently, these complaints are scattered across Telegram and WhatsApp, leading to:
 
-### 1. Backend
-```bash
+    Data Loss: Important issues get buried in chat history.
+
+    Duplication: Multiple students report the same issue, wasting resources.
+
+    No Prioritization: Critical safety issues are treated the same as minor inconveniences.
+
+💡 Our Solution
+
+CampusEye AI provides a centralized platform where students can report problems with Text + Photo + Location. Our system uses AI to:
+
+    Classify: Automatically identify the department (Water, ICT, Security).
+
+    Prioritize: Score urgency from "Low" to "Critical."
+
+    Deduplicate: Alert admins if the same issue has already been reported.
+
+    Analyze: Detect anomalies or spam reports.
+
+    Route: Send the report directly to the office responsible for fixing it.
+
+🛠️ Tech Stack
+
+    Frontend: React.js + Vite
+
+    Backend: Node.js + Express.js
+
+    AI Engine: Google Gemini API
+
+    Image Handling: Cloudinary API + Multer
+
+    Database: SQLite / PostgreSQL
+
+🚀 How to Run Locally
+1. Backend Setup
+Bash
+
 cd backend
 npm install
+# Create a .env file with your GEMINI_API_KEY and CLOUDINARY keys
 npm run dev
 
-2. Frontend (open new terminal)
+2. Frontend Setup (In a new terminal)
+Bash
 
 cd frontend
 npm install
 npm run dev
 
+📄 Documentation
 
+For a deep dive into the system logic, check out our full documentation:
 
-Full Documentation
-Detailed project documentation → [CampusEye AI Documentation.docx](campus-Eye AI-documentation.docx)
+👉 CampusEye AI Documentation.docx
 
-
-Made with ❤️ for Bahir Dar University students
-CampusEye AI – Smart Campus, Better Life
+Made with ❤️ for Bahir Dar University students. CampusEye AI – Smart Campus, Better Life

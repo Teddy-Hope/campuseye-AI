@@ -1,5 +1,5 @@
-const express = require("express");
-const cors = require("cors");
+const express = require("express"); 
+const cors = require("cors"); // for unblocking the requests of React to Node in the browser
 const dotenv = require("dotenv");
 
 dotenv.config();

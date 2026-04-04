@@ -1,6 +1,6 @@
 # CampusEye AI
 
-**AI-Powered Campus Problem Reporter & Smart Triage System**  
+**AI-Powered Campus Problem Reporter*  
 *Turning campus complaints into intelligent, prioritized actions.*
 
 ---

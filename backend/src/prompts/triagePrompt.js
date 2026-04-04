@@ -1,6 +1,6 @@
 const buildTriagePrompt = (reportText) => {
   return `
-You are an AI campus issue triage assistant.
+You are an AI campus issue assistant.
 
 Your job is to analyze a student complaint and return ONLY valid JSON.
 

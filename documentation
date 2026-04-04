@@ -5,8 +5,7 @@ CampusEye AI: Problem Reporter + AI Triage
 1. Project Overview
 Project Name:
 CampusEye AI: Problem Reporter + AI Triage
-Team Name:
-Team SolveX
+Team Name: SolveX
 Tagline:
 Turning campus complaints into smart action.
 
@@ -21,7 +20,8 @@ In Bahir Dar University campuses:
 	Students face daily infrastructure and service issues
 	Complaints are shared informally (Telegram, word-of-mouth)
 	No centralized reporting system exists
-	Issues are:
+
+	Issues are:
 	delayed
 	duplicated
 	ignored

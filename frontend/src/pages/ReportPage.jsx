@@ -5,10 +5,10 @@ function ReportPage() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    location: "",
-    image_url: ""
+    location: ""
   });
 
+  const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -22,16 +22,10 @@ function ReportPage() {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-
     if (!file) return;
 
-    const previewUrl = URL.createObjectURL(file);
-
-    setImagePreview(previewUrl);
-    setFormData((prev) => ({
-      ...prev,
-      image_url: previewUrl
-    }));
+    setSelectedFile(file);
+    setImagePreview(URL.createObjectURL(file));
   };
 
   const handleSubmit = async (e) => {
@@ -39,16 +33,25 @@ function ReportPage() {
 
     try {
       setLoading(true);
-      const res = await createReport(formData);
+
+      const submitData = new FormData();
+      submitData.append("title", formData.title);
+      submitData.append("description", formData.description);
+      submitData.append("location", formData.location);
+
+      if (selectedFile) {
+        submitData.append("image", selectedFile);
+      }
+
+      const res = await createReport(submitData);
       setResponse(res.data.data);
 
       setFormData({
         title: "",
         description: "",
-        location: "",
-        image_url: ""
+        location: ""
       });
-
+      setSelectedFile(null);
       setImagePreview("");
     } catch (error) {
       console.error("Error creating report:", error);

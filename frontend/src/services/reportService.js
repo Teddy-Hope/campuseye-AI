@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api/reports"
+  baseURL: "https://campuseye-backend-wq1x.onrender.com"
 });
 
 export const createReport = (formData) =>

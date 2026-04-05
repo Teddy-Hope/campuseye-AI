@@ -1,9 +1,11 @@
 import axios from "axios";
 
+// 1. baseURL መጨረሻ ላይ /api/reports የሚለውን ጨምርበት
 const API = axios.create({
-  baseURL: "https://campuseye-backend-wq1x.onrender.com"
+  baseURL: "https://campuseye-backend-wq1x.onrender.com/api/reports"
 });
 
+// 2. እዚህ ጋር "/" ብቻ ማድረጉ አሁን ትክክል ይሆናል (ምክንያቱም baseURL ውስጥ ስላለ)
 export const createReport = (formData) =>
   API.post("/", formData, {
     headers: {

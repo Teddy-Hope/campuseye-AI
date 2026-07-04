@@ -1,25 +1,7 @@
 👁️ CampusEye AI
 
 AI-Powered Campus Problem Reporter Turning campus complaints into intelligent, prioritized actions.
-👥 Team SolveX
 
-Meet the 4-member team behind the innovation:
-
-    Teddy Hope (Teddy-Hope) – Lead Backend Architect & AI Integration
-
-        Designed the AI logic, integrated Gemini API, and managed the overall system architecture.
-
-    Abusha – Frontend Lead & Project Documentation
-
-        Developed the user interface, dashboard components, and authored the project technical documentation.
-
-    sismo091234-ops – Backend Middleware & Feature Engineering
-
-        Improved system security by updating CORS middleware and implemented core features in server.js.
-
-    michusasa1621-max – Backend Developer & System Editor
-
-        Conducted critical backend updates, code edits, and optimized server-side performance.
 
 📍 The Problem
 
